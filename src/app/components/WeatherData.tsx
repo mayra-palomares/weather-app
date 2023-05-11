@@ -9,7 +9,7 @@ type Props = {
 
 const WeatherData = ({ current, forecast }: Props) => {
   return (
-    <div>
+    <div className="weatherPage">
       <CurrentWeather data={current} />
       <ForecastWeatherList data={forecast} />
     </div>

@@ -7,10 +7,12 @@ type Props = {
 
 const ForecastWeatherList = ({ data }: Props) => {
   return (
-    <>
-      <div>ForecastWeatherList</div>
+    <div className="forecastWeather">
       <ForecastWeatherItem />
-    </>
+      <ForecastWeatherItem />
+      <ForecastWeatherItem />
+      <ForecastWeatherItem />
+    </div>
   );
 };
 

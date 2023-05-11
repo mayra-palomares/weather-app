@@ -6,7 +6,6 @@ type Props = {
 };
 
 const ForecastWeatherList = ({ data }: Props) => {
-  console.log("Forecast Weather:", data);
   return (
     <>
       <div>ForecastWeatherList</div>

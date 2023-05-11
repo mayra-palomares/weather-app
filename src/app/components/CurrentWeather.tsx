@@ -5,7 +5,6 @@ type Props = {
 };
 
 const CurrentWeather = ({ data }: Props) => {
-  console.log("Current weather: ", data);
   return <div>CurrentWeather</div>;
 };
 

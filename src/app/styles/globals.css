@@ -2,90 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  min-height: 100vh;
-  width: 100%;
+@layer base{
+  html, body {
+    @apply min-h-full min-w-full;
+  }
 }
 
-.weatherPage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.currentWeather {
-  width: 100%;
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-}
-
-.currentWeather > .title {
-  width: 50%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.currentWeather .temperature {
-  font-size: 4rem;
-}
-
-.currentWeather .location {
-  font-size: 2rem;
-}
-
-.currentWeather .description {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.currentWeather > .details {
-  display: flex;
-  justify-content: center;
-  gap:15px;
-}
-
-.currentWeather .detail-item {
-  height: 120px;
-  width: 140px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  border: 1px solid gray ;
-  border-radius: 10%;
-}
-
-.forecastWeather {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap:20px;
-}
-
-.forecastWeather > .list-item {
-  height: 200px;
-  width: 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  border: 1px solid gray ;
-  border-radius: 10%;
-}
-
-.forecastWeather .title {
-  font-size: 1.2rem;
-}
-
-.forecastWeather .temperature {
-  font-size: 0.8rem;
+@layer components {
+  .weatherPage {
+    @apply flex flex-col items-center justify-start;
+  }
+  
+  .currentWeather {
+    @apply w-full min-h-[60vh] flex flex-col items-center justify-center gap-28;
+  }
+  
+  .currentWeather > .title {
+    @apply w-[50%] flex justify-between items-end;
+  }
+  
+  .currentWeather .temperature {
+    @apply text-7xl;
+  }
+  
+  .currentWeather .location {
+    @apply text-4xl;
+  }
+  
+  .currentWeather .description {
+    @apply flex flex-col justify-end items-center;
+  }
+  
+  .currentWeather > .details {
+    @apply flex justify-center gap-[15px];
+  }
+  
+  .currentWeather .detail-item {
+    @apply h-[120px] w-[140px] flex flex-col items-center justify-around
+            border-2 border-solid border-gray-300 rounded-2xl;
+  }
+  
+  .forecastWeather {
+    @apply w-full flex justify-center items-center gap-[20px];
+  }
+  
+  .forecastWeather > .list-item {
+    @apply h-[200px] w-[150px] flex flex-col justify-around items-center
+          border-2 border-solid border-gray-300 rounded-2xl;
+  }
+  
+  .forecastWeather .title {
+    @apply text-lg;
+  }
+  
+  .forecastWeather .temperature {
+    @apply text-sm;
+  }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import CurrentWeather from "./CurrentWeather";
-import ForecastWeatherList from "./ForecastWeatherList";
+import ForecastWeather from "./ForecastWeather";
 
 type Props = {
   current: object;
@@ -11,7 +11,7 @@ const WeatherData = ({ current, forecast }: Props) => {
   return (
     <div className="weatherPage">
       <CurrentWeather data={current} />
-      <ForecastWeatherList data={forecast} />
+      <ForecastWeather data={forecast} />
     </div>
   );
 };

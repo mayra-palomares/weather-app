@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import CurrentWeatherItem from "./CurrentWeatherItem";
 
 type Props = {
@@ -14,7 +15,7 @@ const CurrentWeather = ({ data }: Props) => {
           <h2 className="location">Lisboa, Portugal</h2>
         </div>
         <div className="description">
-          <img />
+          <Image src="/weather/rain.svg" alt="rain" width="200" height="200" />
           <span>Feels Like: 15ºC</span>
           <span>H: 23º L:15º</span>
         </div>

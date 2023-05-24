@@ -1,6 +1,7 @@
-export type Coordinates = {
-    latitude: number;
-    longitude: number;
+export type Location = {
+    latitude?: number;
+    longitude?: number;
     valid: boolean;
+    key?: string;
   };
   

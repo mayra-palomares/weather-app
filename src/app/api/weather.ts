@@ -1,37 +1,48 @@
-import { Coordinates } from "../types/Location";
+import { Location } from "../types/Location";
 
 type Params = {
-    units: string;
-    appid: string;
-    lat?: string;
-    lon?: string;
-    q?: string; //city
+    apikey?: string;
+    q?: string; //location
+    metric?: string;
+    details?: string;
 }
 
-const getParams = (location: Coordinates) => {
-    const params: Params = {
-        units: 'metric',
-        appid: process.env.NEXT_PUBLIC_WEATHER_API_KEY!,
+const getAuthorizationParams = (): Params => {
+    return  {
+        apikey: process.env.NEXT_PUBLIC_WEATHER_API_KEY!,
     };
+}
+
+const getLocationParams = (location: Location): Params => {
+    const params: Params = getAuthorizationParams();
+
     if(location.valid){
-        params.lat = location.latitude.toString();
-        params.lon = location.longitude.toString();
+        params.q = location.latitude + '-' + location.longitude;
     }else{
         params.q = process.env.NEXT_PUBLIC_DEFAULT_CITY!
     }
 
-    return Object.entries(params);
+    return params;
 }
 
-const getData = (apiUrl: string, location: Coordinates) => {
-    const params = getParams(location);
-    return fetch(apiUrl + new URLSearchParams(params));
+const getData = (apiUrl: string, params: Params) => {
+    return fetch(apiUrl + new URLSearchParams(Object.entries(params)));
 }
 
-export function getCurrentWeather(location: Coordinates) {
-    return getData(`${process.env.NEXT_PUBLIC_WEATHER_API_URL}/weather?`, location);
+export function getLocationKey(location: Location) {
+    const params: Params = getLocationParams(location);
+    return getData(`${process.env.NEXT_PUBLIC_WEATHER_API_URL}/locations/v1/search?`, params);
 }
 
-export function getForecastWeather(location: Coordinates, days: number = 4) {
-    return getData(`${process.env.NEXT_PUBLIC_WEATHER_API_URL}/forecast?cnt=${days}&`, location);
+export function getCurrentWeather(locationKey: string) {
+    const params: Params = getAuthorizationParams();
+    params.details = 'true';
+    return getData(`${process.env.NEXT_PUBLIC_WEATHER_API_URL}/currentconditions/v1/${locationKey}?`, params);
+}
+
+export function getForecastWeather(locationKey: string) {
+    const params: Params = getAuthorizationParams();
+    params.metric = 'true';
+    params.details = 'true';
+    return getData(`${process.env.NEXT_PUBLIC_WEATHER_API_URL}/forecasts/v1/daily/5day/${locationKey}?`, params);
 }

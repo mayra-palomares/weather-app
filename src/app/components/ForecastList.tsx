@@ -1,17 +1,17 @@
 import React from "react";
 import ForecastListItem from "./ForecastListItem";
+import { DailyForecast } from "../types/ForecastWeather";
 
 type Props = {
-  data: object;
+  forecast: DailyForecast[];
 };
 
-const ForecastList = ({ data }: Props) => {
+const ForecastList = ({ forecast }: Props) => {
   return (
     <div className="forecastList">
-      <ForecastListItem />
-      <ForecastListItem />
-      <ForecastListItem />
-      <ForecastListItem />
+      {forecast.map((day) => (
+        <ForecastListItem {...day} />
+      ))}
     </div>
   );
 };

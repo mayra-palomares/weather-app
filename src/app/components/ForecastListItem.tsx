@@ -1,14 +1,17 @@
 import React from "react";
 import Image from "next/image";
+import { DailyForecast } from "../types/ForecastWeather";
+import { getWeatherImage } from "../utils/images";
 
-type Props = {};
-
-const ForecastListItem = (props: Props) => {
+const ForecastListItem = ({ day, minTemp, maxTemp, iconId }: DailyForecast) => {
+  const icon = getWeatherImage(iconId);
   return (
     <div className="list-item">
-      <span className="title">Today</span>
-      <Image src="/weather/rain.svg" alt="rain" width="100" height="100" />
-      <span className="temperature">23º - 15º</span>
+      <span className="title">{day}</span>
+      <Image src={icon.url} alt={icon.text} width="100" height="100" />
+      <span className="temperature">
+        {maxTemp}º - {minTemp}º
+      </span>
     </div>
   );
 };

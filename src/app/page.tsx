@@ -5,14 +5,19 @@ import {
   getCurrentWeather,
   getForecastWeather,
   getLocationKey,
+  parseCurrentWeatherData,
+  parseForecastWeatherData,
 } from "./api/weather";
 import WeatherData from "./components/WeatherData";
+import { DailyForecast } from "./types/ForecastWeather";
 import { Location } from "./types/Location";
 
 export default async function Home() {
   const [location, setLocation] = useState({ valid: false } as Location);
   const [currentWeather, setCurrentWeather] = useState({});
-  const [forecastWeather, setForecastWeather] = useState({});
+  const [forecastWeather, setForecastWeather] = useState({
+    forecast: new Array<DailyForecast>(),
+  });
 
   const getNavigatorLocation = (): Promise<Location> => {
     return new Promise((resolve) => {
@@ -36,25 +41,25 @@ export default async function Home() {
 
   const fetchLocationKey = (navLocation: Location): Promise<Location> => {
     return new Promise((resolve) => {
-      getLocationKey(navLocation)
-        .then((result) => result.json())
-        .then((data) => {
-          const locationData = data && data.length > 0 ? data[0] : {};
-          const updatedLocation = { ...navLocation, key: locationData.Key };
-          setLocation(updatedLocation);
-          resolve(updatedLocation);
-        });
+      getLocationKey(navLocation).then((data) => {
+        const locationData = data && data.length > 0 ? data[0] : {};
+        const updatedLocation = { ...navLocation, key: locationData.Key };
+        setLocation(updatedLocation);
+        resolve(updatedLocation);
+      });
     });
   };
 
   const fetchWeatherData = (location: Location) => {
     if (location && location.key) {
-      getCurrentWeather(location.key).then((current) => {
-        setCurrentWeather(current.json());
+      getCurrentWeather(location.key).then((data) => {
+        const current = parseCurrentWeatherData(data);
+        setCurrentWeather(current);
       });
-      getForecastWeather(location.key).then((forecast) =>
-        setForecastWeather(forecast.json())
-      );
+      getForecastWeather(location.key).then((data) => {
+        const forecast = parseForecastWeatherData(data);
+        setForecastWeather(forecast);
+      });
     }
   };
 

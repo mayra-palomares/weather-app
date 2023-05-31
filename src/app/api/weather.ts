@@ -1,4 +1,34 @@
+import { CurrentWeather } from "../types/CurrentWeather";
+import { DailyForecast, DailyForecastAPIResponse, ForecastAPIResponse, ForecastWeather } from "../types/ForecastWeather";
 import { Location } from "../types/Location";
+
+export const parseCurrentWeatherData = (data: object): CurrentWeather => {
+    const currentWeather: CurrentWeather = {};
+
+    return currentWeather;
+  };
+
+export const parseForecastWeatherData = (
+    data: ForecastAPIResponse
+  ): ForecastWeather => {
+    const forecast: Array<DailyForecast> = [];
+    const dailyForecasts = data.DailyForecasts as DailyForecastAPIResponse[];
+    dailyForecasts.forEach((dayData) => {
+        const date = new Date(dayData.Date);
+        const dayName = date.toLocaleDateString(undefined, { weekday: 'long' });
+        const dailyForecast: DailyForecast = {
+            day: dayName,
+            minTemp: dayData.Temperature.Minimum.Value,
+            maxTemp: dayData.Temperature.Maximum.Value,
+            precipitation: dayData.Day.PrecipitationProbability,
+            weather: dayData.Day.IconPhrase,
+            iconId: dayData.Day.Icon
+        }
+        forecast.push(dailyForecast);
+    });
+    return {forecast: forecast};
+  };
+
 
 type Params = {
     apikey?: string;
@@ -26,7 +56,7 @@ const getLocationParams = (location: Location): Params => {
 }
 
 const getData = (apiUrl: string, params: Params) => {
-    return fetch(apiUrl + new URLSearchParams(Object.entries(params)));
+    return fetch(apiUrl + new URLSearchParams(Object.entries(params))).then(response => response.json());
 }
 
 export function getLocationKey(location: Location) {

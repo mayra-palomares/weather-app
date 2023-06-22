@@ -12,9 +12,21 @@
   .weatherPage {
     @apply flex flex-col items-center justify-start gap-5;
   }
+
+  .search {
+    @apply w-full min-h-[20vh] flex items-center justify-center;
+  }
+
+  .search > input {
+    @apply block p-2.5 z-20 text-sm text-gray-900 rounded-l-lg border-l-gray-50 border-l-2 border border-gray-300;
+  }
+
+  .search > button {
+    @apply top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-blue-300;
+  }
   
   .currentWeather {
-    @apply w-full min-h-[60vh] flex flex-col items-center justify-center gap-10 sm:gap-20;
+    @apply w-full min-h-[40vh] flex flex-col items-center justify-center gap-10 sm:gap-20;
   }
   
   .currentWeather > .title {

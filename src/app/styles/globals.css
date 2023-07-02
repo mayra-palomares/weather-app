@@ -14,7 +14,7 @@
   }
 
   .search {
-    @apply w-full min-h-[20vh] flex items-center justify-center;
+    @apply w-full min-h-[10vh] flex items-end justify-center;
   }
 
   .search > input {
@@ -26,7 +26,7 @@
   }
   
   .currentWeather {
-    @apply w-full min-h-[40vh] flex flex-col items-center justify-center gap-10 sm:gap-20;
+    @apply w-full min-h-[30vh] flex flex-col items-center justify-center gap-10 sm:gap-20;
   }
   
   .currentWeather > .title {

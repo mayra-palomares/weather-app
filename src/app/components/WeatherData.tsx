@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { CurrentWeather as CurrentWeatherType } from "../types/CurrentWeather";
-import { ForecastWeather as ForecastWeatherType } from "../types/ForecastWeather";
 import { WeatherData } from "../types/WeatherData";
 import CurrentWeather from "./CurrentWeather";
 import ForecastWeather from "./ForecastWeather";
@@ -32,7 +30,7 @@ const WeatherData = () => {
       {weatherData ? (
         <>
           <CurrentWeather data={weatherData.currentData} />
-          <ForecastWeather data={weatherData.forecastData} />{" "}
+          <ForecastWeather data={weatherData.forecastData} />
         </>
       ) : null}
     </div>

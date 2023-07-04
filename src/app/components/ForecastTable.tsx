@@ -15,10 +15,22 @@ const ForecastTableItem = ({
     <div className="table-row">
       <span>{day}</span>
       <div className="precipitation">
-        <Image src={icon.url} alt="rain" width="40" height="40" />
+        <Image
+          src={icon.url}
+          alt="rain"
+          width="40"
+          height="40"
+          priority={false}
+        />
         <span>{precipitation}%</span>
       </div>
-      <Image src={icon.url} alt={icon.text} width="40" height="40" />
+      <Image
+        src={icon.url}
+        alt={icon.text}
+        width="40"
+        height="40"
+        priority={false}
+      />
       <span>{maxTemp}º</span>
       <span>{minTemp}º</span>
     </div>

@@ -8,7 +8,13 @@ const ForecastListItem = ({ day, minTemp, maxTemp, iconId }: DailyForecast) => {
   return (
     <div className="list-item">
       <span className="title">{day}</span>
-      <Image src={icon.url} alt={icon.text} width="100" height="100" />
+      <Image
+        src={icon.url}
+        alt={icon.text}
+        width="100"
+        height="100"
+        priority={false}
+      />
       <span className="temperature">
         {maxTemp}º - {minTemp}º
       </span>
@@ -24,7 +30,7 @@ const ForecastList = ({ forecast }: Props) => {
   return (
     <div className="forecastList">
       {forecast.map((day) => (
-        <ForecastListItem {...day} />
+        <ForecastListItem key={day.day} {...day} />
       ))}
     </div>
   );

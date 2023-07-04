@@ -28,8 +28,8 @@ const WeatherItem = ({ icon, children }: WeatherItemProps) => {
       <Image
         src={`weather/${icon}.svg`}
         alt="rain"
-        width="70"
-        height="70"
+        width="80"
+        height="80"
         priority={false}
       />
       {children}
@@ -109,10 +109,10 @@ const CurrentWeather = ({ data }: CurrentWeatherProps) => {
       </div>
       <div className="details">
         <CurrentWeatherItem icon="rain" name="Precipitation" value="2%" />
-        <CurrentWeatherItem icon="rain" name="Humidity" value="44%" />
-        <CurrentWeatherItem icon="rain" name="Wind" value="28 km/h" />
+        <CurrentWeatherItem icon="humidity" name="Humidity" value="44%" />
+        <CurrentWeatherItem icon="wind" name="Wind" value="28 km/h" />
         <SunriseSunsetItem
-          icon="rain"
+          icon="horizon"
           sunrise={"2023-07-03T06:16:00+01:00"}
           sunset={"2023-07-03T21:05:00+01:00"}
         />

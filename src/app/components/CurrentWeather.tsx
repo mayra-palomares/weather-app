@@ -5,14 +5,21 @@ import { getWeatherImage } from "../utils/images";
 
 type WeatherItemValueProps = {
   name: string;
-  value: string;
+  value?: number | string;
+  unit?: string;
 };
 
-const WeatherItemValue = ({ name, value }: WeatherItemValueProps) => {
+const WeatherItemValue = ({
+  name,
+  value = "",
+  unit = "",
+}: WeatherItemValueProps) => {
   return (
     <div className="weatherItemValue">
       <label>{name}</label>
-      <span>{value}</span>
+      <span>
+        {value} {unit}
+      </span>
     </div>
   );
 };
@@ -40,34 +47,44 @@ const WeatherItem = ({ icon, children }: WeatherItemProps) => {
 type CurrentWeatherItemProps = {
   icon: string;
   name: string;
-  value: string;
+  value?: number | string;
+  unit: string;
 };
 
-const CurrentWeatherItem = ({ icon, name, value }: CurrentWeatherItemProps) => {
+const CurrentWeatherItem = ({
+  icon,
+  name,
+  value = "",
+  unit,
+}: CurrentWeatherItemProps) => {
   return (
     <WeatherItem icon={icon}>
-      <WeatherItemValue name={name} value={value} />
+      <WeatherItemValue name={name} value={value} unit={unit} />
     </WeatherItem>
   );
 };
 
 type SunriseSunsetItemProps = {
   icon: string;
-  sunrise: string;
-  sunset: string;
+  sunrise?: string;
+  sunset?: string;
 };
 
 const SunriseSunsetItem = ({
   icon,
-  sunrise,
-  sunset,
+  sunrise = "",
+  sunset = "",
 }: SunriseSunsetItemProps) => {
   const timeFormat = new Intl.DateTimeFormat("en", {
     hour: "2-digit",
     minute: "2-digit",
   });
-  const sunriseStr = timeFormat.format(new Date(sunrise)).toLocaleLowerCase();
-  const sunsetStr = timeFormat.format(new Date(sunset)).toLocaleLowerCase();
+  const sunriseStr = sunrise
+    ? timeFormat.format(new Date(sunrise)).toLocaleLowerCase()
+    : "";
+  const sunsetStr = sunset
+    ? timeFormat.format(new Date(sunset)).toLocaleLowerCase()
+    : "";
   return (
     <WeatherItem icon={icon}>
       <div className="sunriseSunsetItem">
@@ -108,13 +125,28 @@ const CurrentWeather = ({ data }: CurrentWeatherProps) => {
         </div>
       </div>
       <div className="details">
-        <CurrentWeatherItem icon="rain" name="Precipitation" value="2%" />
-        <CurrentWeatherItem icon="humidity" name="Humidity" value="44%" />
-        <CurrentWeatherItem icon="wind" name="Wind" value="28 km/h" />
+        <CurrentWeatherItem
+          icon="rain"
+          name="Precipitation"
+          value={data.precipitation}
+          unit="%"
+        />
+        <CurrentWeatherItem
+          icon="humidity"
+          name="Humidity"
+          value={data.humidity}
+          unit="%"
+        />
+        <CurrentWeatherItem
+          icon="wind"
+          name="Wind"
+          value={data.wind}
+          unit="km/h"
+        />
         <SunriseSunsetItem
           icon="horizon"
-          sunrise={"2023-07-03T06:16:00+01:00"}
-          sunset={"2023-07-03T21:05:00+01:00"}
+          sunrise={data.sunrise}
+          sunset={data.sunset}
         />
       </div>
     </div>

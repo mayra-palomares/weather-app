@@ -9,8 +9,8 @@ export type CurrentWeather = {
     precipitation?: number;
     humidity?: number;
     wind?: number;
-    sunrise?: Date;
-    sunset?: Date;
+    sunrise?: string;
+    sunset?: string;
     iconId?: number;
 }
 

@@ -8,13 +8,13 @@ type Props = {
 };
 
 const ForecastWeather = ({ data }: Props) => {
-  const forecast = data.forecast;
-  return (
+  const forecast = data.forecast || [];
+  return forecast.length > 0 ? (
     <>
       <ForecastList forecast={forecast} />
       <ForecastTable forecast={forecast} />
     </>
-  );
+  ) : null;
 };
 
 export default ForecastWeather;

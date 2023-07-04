@@ -1,7 +1,9 @@
 export type Location = {
-    city: string;
+    valid: boolean;
+    city?: string;
+    country?: string;
     latitude?: number;
     longitude?: number;
-    valid: boolean;
+    key?: string;
   };
   

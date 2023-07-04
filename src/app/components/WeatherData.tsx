@@ -3,40 +3,38 @@
 import React, { useEffect, useState } from "react";
 import { CurrentWeather as CurrentWeatherType } from "../types/CurrentWeather";
 import { ForecastWeather as ForecastWeatherType } from "../types/ForecastWeather";
+import { WeatherData } from "../types/WeatherData";
 import CurrentWeather from "./CurrentWeather";
 import ForecastWeather from "./ForecastWeather";
 import SearchInput from "./SearchInput";
 import fetchWeatherData from "./../utils/weather";
 
 const WeatherData = () => {
-  const [currentWeather, setCurrentWeather] =
-    useState<CurrentWeatherType>(null);
-  const [forecastWeather, setForecastWeather] =
-    useState<ForecastWeatherType>(null);
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const [currentWeather, forecastWeather] = await fetchWeatherData(
-        "Lisbon"
-      );
-      setCurrentWeather(currentWeather);
-      setForecastWeather(forecastWeather);
+      const response = await fetchWeatherData();
+      setWeatherData({ ...response });
     };
 
     fetchData();
   }, []);
 
   const handleSearch = async (city: string) => {
-    const [currentWeather, forecastWeather] = await fetchWeatherData(city);
-    setCurrentWeather(currentWeather);
-    setForecastWeather(forecastWeather);
+    const response = await fetchWeatherData(city);
+    setWeatherData({ ...response });
   };
 
   return (
     <div className="weatherPage">
       <SearchInput onSearch={handleSearch} />
-      {currentWeather ? <CurrentWeather data={currentWeather} /> : null}
-      {forecastWeather ? <ForecastWeather data={forecastWeather} /> : null}
+      {weatherData ? (
+        <>
+          <CurrentWeather data={weatherData.currentData} />
+          <ForecastWeather data={weatherData.forecastData} />{" "}
+        </>
+      ) : null}
     </div>
   );
 };

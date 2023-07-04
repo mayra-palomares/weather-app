@@ -11,4 +11,10 @@ export type CurrentWeather = {
     wind?: number;
     sunrise?: Date;
     sunset?: Date;
+    iconId?: number;
+}
+
+export type CurrentWeatherAPIResponse = {
+    WeatherIcon : number;
+    WeatherText: string;
 }

@@ -50,14 +50,22 @@
   }
   
   .currentWeather .detail-item {
-    @apply min-h-[120px]  min-w-[140px] max-w-[150px] flex flex-col items-center justify-around basis-1/2 sm:basis-1/5
+    @apply min-h-[140px]  min-w-[180px] max-w-[200px] flex flex-col items-center justify-around basis-1/2 sm:basis-1/5
             border-2 border-solid border-gray-300 rounded-2xl p-2;
   }
 
-  .currentWeather .detail-item span{
-    @apply text-sm;
+  .currentWeather .sunriseSunsetItem {
+    @apply flex gap-3;
   }
   
+  .currentWeather .weatherItemValue {
+    @apply flex flex-col justify-center items-center text-sm;
+  }
+
+  .currentWeather .weatherItemValue label{
+    @apply font-semibold;
+  }
+
   .forecastList {
     @apply w-full sm:flex justify-center items-center gap-[20px] hidden ;
   }

@@ -84,14 +84,14 @@
   }
 
   .forecastTable {
-    @apply w-3/5 p-5 border-2 border-solid border-gray-300 rounded-2xl sm:hidden;
+    @apply w-10/12 p-2 border-2 border-solid border-gray-300 rounded-2xl sm:hidden;
   }
 
   .forecastTable .table-row {
-    @apply flex justify-around items-center;
+    @apply flex justify-center items-center gap-5;
   }
 
   .forecastTable .table-row .precipitation {
-    @apply flex justify-center items-center;
+    @apply flex justify-center items-center gap-0;
   }
 }

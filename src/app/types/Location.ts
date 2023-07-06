@@ -7,4 +7,12 @@ type Location = {
     key?: string;
   };
   
+export type LocationAPIResponse = {
+  Key: string;
+  LocalizedName: string;
+  Country: {
+    LocalizedName: string;
+  }
+}
+
 export default Location;

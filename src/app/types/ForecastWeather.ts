@@ -27,6 +27,10 @@ export type DailyForecastAPIResponse = {
     Icon: number,
     IconPhrase: string,
     PrecipitationProbability: number
+  },
+  Sun: {
+    Rise : string,
+    Set: string
   }
 }
 

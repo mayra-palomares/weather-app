@@ -1,4 +1,4 @@
-export type Location = {
+type Location = {
     valid: boolean;
     city?: string;
     country?: string;
@@ -7,3 +7,4 @@ export type Location = {
     key?: string;
   };
   
+export default Location;

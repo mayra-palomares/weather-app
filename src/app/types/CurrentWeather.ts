@@ -9,12 +9,30 @@ export type CurrentWeather = {
     precipitation?: number;
     humidity?: number;
     wind?: number;
-    sunrise?: Date;
-    sunset?: Date;
+    sunrise?: string;
+    sunset?: string;
     iconId?: number;
 }
 
 export type CurrentWeatherAPIResponse = {
     WeatherIcon : number;
     WeatherText: string;
+    Temperature: {
+        Metric: {
+            Value: number;
+        }
+    },
+    RealFeelTemperature: {
+        Metric: {
+            Value: number;
+        }
+    },
+    Wind: {
+        Speed: {
+            Metric: {
+                Value:  number;
+            }
+        }
+    },
+    RelativeHumidity: number;
 }

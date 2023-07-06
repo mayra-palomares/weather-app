@@ -17,4 +17,22 @@ export type CurrentWeather = {
 export type CurrentWeatherAPIResponse = {
     WeatherIcon : number;
     WeatherText: string;
+    Temperature: {
+        Metric: {
+            Value: number;
+        }
+    },
+    RealFeelTemperature: {
+        Metric: {
+            Value: number;
+        }
+    },
+    Wind: {
+        Speed: {
+            Metric: {
+                Value:  number;
+            }
+        }
+    },
+    RelativeHumidity: number;
 }

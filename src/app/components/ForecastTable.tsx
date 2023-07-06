@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { DailyForecast } from "../types/ForecastWeather";
 import { getWeatherImage } from "../utils/images";
+import { getCurrentDayName } from "../utils/date";
 
 const ForecastTableItem = ({
   day,
@@ -10,11 +11,12 @@ const ForecastTableItem = ({
   precipitation,
   iconId,
 }: DailyForecast) => {
-  const date = "Today";
+  const currentDay = getCurrentDayName();
+  const dayName = day === currentDay ? "Today" : day;
   const icon = getWeatherImage(iconId);
   return (
     <div className="table-row">
-      <span>{date}</span>
+      <span>{dayName}</span>
       <div className="precipitation">
         <Image
           src="weather/raindrop.svg"
@@ -46,7 +48,7 @@ const ForecastTable = ({ forecast }: Props) => {
   return (
     <div className="forecastTable">
       {forecast.map((day) => (
-        <ForecastTableItem {...day} />
+        <ForecastTableItem key={day.day} {...day} />
       ))}
     </div>
   );

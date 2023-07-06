@@ -2,17 +2,21 @@ import {getCurrentWeather, getForecastWeather, getLocationKey} from "./weatherAp
 import { CurrentWeather, CurrentWeatherAPIResponse } from "../types/CurrentWeather";
 import { DailyForecast, DailyForecastAPIResponse, ForecastAPIResponse, ForecastWeather } from "../types/ForecastWeather";
 import { WeatherData } from "../types/WeatherData";
-import LocationType from "../types/Location";
+import LocationType, { LocationAPIResponse } from "../types/Location";
 import LocationData from "./../mocks/Location.json";
+import { getDayName } from "./date";
 
 const useMockData: boolean = true;
 
 /* PARSERS */
-const parseLocationData = (location:LocationType, data):LocationType => {
-    const locationData = data && data.length > 0 ? data[0] : {};
-    location.key = locationData.Key;
-    location.city = locationData.LocalizedName;
-    location.country = locationData.Country.LocalizedName;
+const parseLocationData = (location:LocationType, data: LocationAPIResponse[]):LocationType => {
+    if(data &&  data.length > 0) {
+        const locationData = data[0];
+        location.key = locationData.Key;
+        location.city = locationData.LocalizedName;
+        location.country = locationData.Country.LocalizedName;
+    }
+    
     return location
 }
 
@@ -32,8 +36,8 @@ const parseCurrentWeatherData = (data: CurrentWeatherAPIResponse, forecastData: 
     if(forecastData){
         currentWeather.sunrise = forecastData.Sun.Rise;
         currentWeather.sunset = forecastData.Sun.Set;
-        currentWeather.maxTemp = forecastData.Temperature.Maximum.Value;
-        currentWeather.minTemp = forecastData.Temperature.Minimum.Value;
+        currentWeather.maxTemp = Math.trunc(forecastData.Temperature.Maximum.Value);
+        currentWeather.minTemp = Math.trunc(forecastData.Temperature.Minimum.Value);
         currentWeather.precipitation = Math.max(forecastData.Day.PrecipitationProbability, forecastData.Night.PrecipitationProbability,0);
       }
     return currentWeather;
@@ -46,7 +50,7 @@ const parseForecastWeatherData = (
     const dailyForecasts = data.DailyForecasts as DailyForecastAPIResponse[];
     dailyForecasts.forEach((dayData) => {
         const date = new Date(dayData.Date);
-        const dayName = date.toLocaleDateString(undefined, { weekday: 'long' });
+        const dayName = getDayName(date)
         const dailyForecast: DailyForecast = {
             day: dayName,
             minTemp: Math.trunc(dayData.Temperature.Minimum.Value),

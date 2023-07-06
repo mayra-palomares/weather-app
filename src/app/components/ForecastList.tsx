@@ -2,12 +2,15 @@ import React from "react";
 import Image from "next/image";
 import { DailyForecast } from "../types/ForecastWeather";
 import { getWeatherImage } from "../utils/images";
+import { getCurrentDayName } from "../utils/date";
 
 const ForecastListItem = ({ day, minTemp, maxTemp, iconId }: DailyForecast) => {
+  const currentDay = getCurrentDayName();
+  const dayName = day === currentDay ? "Today" : day;
   const icon = getWeatherImage(iconId);
   return (
     <div className="list-item">
-      <span className="title">{day}</span>
+      <span className="title">{dayName}</span>
       <Image
         src={icon.url}
         alt={icon.text}
@@ -16,7 +19,7 @@ const ForecastListItem = ({ day, minTemp, maxTemp, iconId }: DailyForecast) => {
         priority={false}
       />
       <span className="temperature">
-        {maxTemp}º - {minTemp}º
+        H: {maxTemp}º - L: {minTemp}º
       </span>
     </div>
   );

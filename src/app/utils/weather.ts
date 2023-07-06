@@ -49,8 +49,8 @@ const parseForecastWeatherData = (
         const dayName = date.toLocaleDateString(undefined, { weekday: 'long' });
         const dailyForecast: DailyForecast = {
             day: dayName,
-            minTemp: dayData.Temperature.Minimum.Value,
-            maxTemp: dayData.Temperature.Maximum.Value,
+            minTemp: Math.trunc(dayData.Temperature.Minimum.Value),
+            maxTemp: Math.trunc(dayData.Temperature.Maximum.Value),
             precipitation: dayData.Day.PrecipitationProbability,
             weather: dayData.Day.IconPhrase,
             iconId: dayData.Day.Icon

@@ -10,14 +10,15 @@ const ForecastTableItem = ({
   precipitation,
   iconId,
 }: DailyForecast) => {
+  const date = "Today";
   const icon = getWeatherImage(iconId);
   return (
     <div className="table-row">
-      <span>{day}</span>
+      <span>{date}</span>
       <div className="precipitation">
         <Image
-          src={icon.url}
-          alt="rain"
+          src="weather/raindrop.svg"
+          alt="precipitation"
           width="40"
           height="40"
           priority={false}
@@ -31,8 +32,8 @@ const ForecastTableItem = ({
         height="40"
         priority={false}
       />
-      <span>{maxTemp}º</span>
-      <span>{minTemp}º</span>
+      <span>H:{maxTemp}º</span>
+      <span>L:{minTemp}º</span>
     </div>
   );
 };
@@ -44,13 +45,9 @@ type Props = {
 const ForecastTable = ({ forecast }: Props) => {
   return (
     <div className="forecastTable">
-      <ForecastTableItem
-        day={"Today"}
-        minTemp={19}
-        maxTemp={25}
-        precipitation={2}
-        iconId={11}
-      />
+      {forecast.map((day) => (
+        <ForecastTableItem {...day} />
+      ))}
     </div>
   );
 };

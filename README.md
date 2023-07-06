@@ -5,6 +5,7 @@
 - [General info](#general-info)
 - [Technologies](#technologies)
 - [Setup](#setup)
+- [Design](#design)
 
 ## General info
 
@@ -49,3 +50,13 @@ This is a web application built using TypeScript, React, Next.JS, and Vite to di
    ```
 
 6. Open your browser and navigate to http://localhost:3000
+
+## Design
+
+### Desktop
+
+   <img src="design/Weather App - Desktop.jpg" height="200">
+
+### Mobile
+
+   <img src="design/Weather App - Mobile.jpg" height="300">

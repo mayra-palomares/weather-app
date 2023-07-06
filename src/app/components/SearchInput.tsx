@@ -34,7 +34,7 @@ const SearchInput = ({ onSearch }: Props) => {
       <input
         type="text"
         id="city"
-        placeholder="Search city"
+        placeholder="Enter a city name"
         autoComplete="off"
         onChange={(e) => setCity(e.target.value)}
       />

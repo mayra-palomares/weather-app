@@ -32,10 +32,11 @@ const SearchInput = ({ onSearch }: Props) => {
   return (
     <div className="search">
       <input
-        type="text"
+        type="search"
         id="city"
         placeholder="Enter a city name"
         autoComplete="off"
+        autoCorrect="off"
         onChange={(e) => setCity(e.target.value)}
       />
       <button type="button" onClick={handleSearch}>

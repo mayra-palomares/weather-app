@@ -6,7 +6,7 @@ import LocationType, { LocationAPIResponse } from "../types/Location";
 import LocationData from "./../mocks/Location.json";
 import { getDayName } from "./date";
 
-const useMockData: boolean = true;
+const useMockData: boolean = false;
 
 /* PARSERS */
 const parseLocationData = (location:LocationType, data: LocationAPIResponse[]):LocationType => {

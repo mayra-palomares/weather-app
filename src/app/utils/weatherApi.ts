@@ -2,7 +2,7 @@ import LocationType from "../types/Location";
 import CurrentData from "./../mocks/CurrentConditions.json";
 import ForecastData from "./../mocks/DailyForecast.json";
 
-const useMockData: boolean = true;
+const useMockData: boolean = false;
 
 type Params = {
     apikey?: string;
